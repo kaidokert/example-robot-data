@@ -425,15 +425,18 @@ class IrisLoader(RobotLoader):
     urdf_filename = "iris_simple.urdf"
     free_flyer = True
 
+
 class SO100Loader(RobotLoader):
     path = "so_arm_description"
     urdf_filename = "so100.urdf"
     urdf_subpath = "urdf"
 
+
 class SO101Loader(RobotLoader):
     path = "so_arm_description"
     urdf_filename = "so101.urdf"
     urdf_subpath = "urdf"
+
 
 class PR2Loader(RobotLoader):
     path = "pr2_description"
