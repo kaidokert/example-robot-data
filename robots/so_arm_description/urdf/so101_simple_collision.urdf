@@ -53,9 +53,17 @@
     <!-- TUNE THIS: Adjust size (x,y,z) and origin to cover base volume -->
     <!-- Extends a few mm beyond actual geometry for clearance -->
     <collision>
-      <origin xyz="-0.01 0.0 0.035" rpy="0 0 0"/>
+      <origin xyz="-0.012 0.0 0.035" rpy="0 0 0"/>
       <geometry>
-        <box size="0.045 0.05 0.07"/>
+        <box size="0.038 0.05 0.07"/>
+        <!-- X: width (left-right), Y: depth (front-back), Z: height (up) -->
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.04 0.0 0.045" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.035 0.02"/>
         <!-- X: width (left-right), Y: depth (front-back), Z: height (up) -->
       </geometry>
     </collision>
@@ -112,10 +120,19 @@
 
     <!-- Collision: Single box for shoulder pivot region -->
     <!-- TUNE THIS: Shortened to exclude joint connection points -->
+    <!-- first narrower box near the base-->
     <collision>
-      <origin xyz="-0.03 0.0 0.01" rpy="0 0 0"/>
+      <origin xyz="-0.036 0.0 0.015" rpy="0 0 0"/>
       <geometry>
-        <box size="0.05 0.055 0.07"/>
+        <box size="0.025 0.040 0.04"/>
+        <!-- Covers servo and pivot, excludes mounting ends -->
+      </geometry>
+    </collision>
+    <!-- thicker part near the next servo -->
+    <collision>
+      <origin xyz="-0.032 0.0 -0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.055 0.025"/>
         <!-- Covers servo and pivot, excludes mounting ends -->
       </geometry>
     </collision>
@@ -149,9 +166,9 @@
     <!-- TUNE THIS: Length and width to cover arm, SHORTENED at ends -->
     <!-- Center positioned in middle of arm segment (not at joint) -->
     <collision>
-      <origin xyz="-0.045 0.0 0.0182" rpy="0 0 0"/>
+      <origin xyz="-0.065 0.0 0.0182" rpy="0 0 0"/>
       <geometry>
-        <box size="0.10 0.03 0.07"/>
+        <box size="0.12 0.026 0.07"/>
         <!-- X: arm length (shortened), Y: width, Z: thickness -->
         <!-- Original arm ~0.113m, shortened to ~0.08m (exclude joints) -->
       </geometry>
@@ -192,9 +209,16 @@
     <!-- Collision: Elongated box for lower arm segment -->
     <!-- TUNE THIS: Similar to upper arm, shortened at ends -->
     <collision>
-      <origin xyz="-0.05 -0.00 0.02" rpy="0 0 0"/>
+      <origin xyz="-0.065 -0.00 0.02" rpy="0 0 0"/>
       <geometry>
-        <box size="0.1 0.03 0.07"/>
+        <box size="0.110 0.025 0.07"/>
+        <!-- X: arm length (shortened), Y: width, Z: thickness -->
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.105 0.003 0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.036 0.07"/>
         <!-- X: arm length (shortened), Y: width, Z: thickness -->
       </geometry>
     </collision>
@@ -226,10 +250,19 @@
 
     <!-- Collision: Small box for wrist region -->
     <!-- TUNE THIS: Covers wrist servo and pitch mechanism -->
+    <!-- smaller box near the lower link -->
     <collision>
-      <origin xyz="0.0 -0.035 0.022" rpy="0 0 0"/>
+      <origin xyz="0.00 -0.028 0.022" rpy="0 0 0"/>
       <geometry>
-        <box size="0.035 0.05 0.065"/>
+        <box size="0.024 0.034 0.062"/>
+      </geometry>
+    </collision>
+
+    <!-- larger box near the gripper -->
+    <collision>
+      <origin xyz="-0.002 -0.045 0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.036 0.033 0.058"/>
       </geometry>
     </collision>
   </link>
@@ -261,18 +294,34 @@
     <!-- Collision: Box for gripper servo region -->
     <!-- TUNE THIS: Main gripper body with servo -->
     <collision>
-      <origin xyz="-0.005 0.0 -0.02" rpy="0 0 0"/>
+      <origin xyz="-0.0024 -0.0002 -0.02" rpy="0 0 0"/>
       <geometry>
-        <box size="0.07 0.025 0.035"/>
+        <box size="0.066 0.032 0.032"/>
+      </geometry>
+    </collision>
+
+    <!-- second thicker box around gripper servo-->
+    <collision>
+      <origin xyz="-0.0020 -0.0002 -0.02" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.052 0.032"/>
       </geometry>
     </collision>
 
     <!-- Collision: Static gripper jaw -->
     <!-- TUNE THIS: Covers the fixed gripper jaw extension -->
+    <!--thinner part of the jaw-->
     <collision>
-      <origin xyz="-0.02 0.0 -0.08" rpy="0 0 0"/>
+      <origin xyz="-0.017 0.0 -0.08" rpy="0 -0.17 0"/>
       <geometry>
-        <box size="0.02 0.02 0.05"/>
+        <box size="0.012 0.015 0.05"/>
+      </geometry>
+    </collision>
+    <!--thicker part of the jaw-->
+    <collision>
+      <origin xyz="-0.022 0.0 -0.05" rpy="0 -0.12 0"/>
+      <geometry>
+        <box size="0.02 0.026 0.04"/>
       </geometry>
     </collision>
   </link>
@@ -314,9 +363,16 @@
     <!-- Collision: Small box for gripper finger -->
     <!-- TUNE THIS: Adjust if you care about gripper collision -->
     <collision>
-      <origin xyz="-0.003 -0.055 0.02" rpy="0 0 0"/>
+      <origin xyz="-0.005 -0.067 0.02" rpy="0 0.0 -0.2"/>
       <geometry>
-        <box size="0.02 0.05 0.018"/>
+        <box size="0.011 0.032 0.018"/>
+      </geometry>
+    </collision>
+    <!-- second thicker, shorter box around finger-->
+    <collision>
+      <origin xyz="-0.002 -0.04 0.02" rpy="0 0 -0.1"/>
+      <geometry>
+        <box size="0.02 0.03 0.02"/>
       </geometry>
     </collision>
   </link>
